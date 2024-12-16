@@ -1,47 +1,51 @@
+# JavaScript Data Types and Structures
+
 JavaScript is a dynamic language, meaning its variable types are determined at runtime rather than at compile time.
 
 ---
 
-### Data types in js
+## Data Types in JavaScript
 
-#### Primitive data types
+### **Primitive Data Types**
 
-1. number
-2. string
-3. bigInt
-4. symbol
-5. null
-6. undefined
-7. boolean
+1. `number`
+2. `string`
+3. `bigint`
+4. `symbol`
+5. `null`
+6. `undefined`
+7. `boolean`
 
-#### Reference data types
+### **Reference Data Types**
 
-1. object
-
-### Data structures in js
-
-1. Array
-2. Map
-3. WeakMap
-4. Set
-5. WeakSet
-6. Function
-7. Date
-8. Object
+1. `object`
 
 ---
 
-### JavaScript Data Types and Data Structures with `typeof`
+## Data Structures in JavaScript
 
-In JavaScript, we can use the `typeof` operator to determine the data type of a value or structure. Below is a detailed breakdown of JavaScript's data types and structures along with their respective `typeof` results.
+1. `Array`
+2. `Map`
+3. `WeakMap`
+4. `Set`
+5. `WeakSet`
+6. `Function`
+7. `Date`
+8. `Object`
 
 ---
 
-## **Primitive Data Types**
+## JavaScript Data Types and Structures with `typeof`
+
+In JavaScript, the `typeof` operator is used to determine the type of a value or structure. Below is a detailed breakdown:
+
+---
+
+### **Primitive Data Types**
 
 Primitive types represent single, immutable values.
 
-### 1. **undefined**
+#### **1. undefined**
 
 ```javascript
 let a;
@@ -50,91 +54,91 @@ console.log(typeof a); // "undefined"
 
 - `undefined` is the default type of a variable that has been declared but not assigned a value.
 
-### 2. **null**
+#### **2. null**
 
 ```javascript
 let b = null;
-console.log(typeof b); // "object" (this is a historical bug in JavaScript)
+console.log(typeof b); // "object" (historical bug)
 ```
 
-- `null` represents the intentional absence of any object value. Its `typeof` result is `"object"`, which is a known JavaScript quirk.
+- `null` represents the intentional absence of any object value. The `typeof` result is a known quirk.
 
-### 3. **boolean**
+#### **3. boolean**
 
 ```javascript
 let c = true;
 console.log(typeof c); // "boolean"
 ```
 
-- `boolean` represents logical values: `true` or `false`.
+- Represents logical values: `true` or `false`.
 
-### 4. **number**
+#### **4. number**
 
 ```javascript
 let d = 42;
 console.log(typeof d); // "number"
 ```
 
-- `number` includes both integers and floating-point numbers.
+- Includes both integers and floating-point numbers.
 
-### 5. **bigint**
+#### **5. bigint**
 
 ```javascript
 let e = 12345678901234567890n;
 console.log(typeof e); // "bigint"
 ```
 
-- `bigint` is used for representing integers larger than `2^53 - 1`.
+- Used for integers larger than `2^53 - 1`.
 
-### 6. **string**
+#### **6. string**
 
 ```javascript
 let f = "Hello, World!";
 console.log(typeof f); // "string"
 ```
 
-- `string` represents a sequence of characters.
+- Represents a sequence of characters.
 
-### 7. **symbol**
+#### **7. symbol**
 
 ```javascript
 let g = Symbol("id");
 console.log(typeof g); // "symbol"
 ```
 
-- `symbol` is used to create unique identifiers.
+- Used to create unique identifiers.
 
 ---
 
-## **Reference Data Type**
+### **Reference Data Type**
 
-Reference types are objects that are mutable and stored by reference.
+Reference types are mutable and stored by reference.
 
-### 8. **object**
+#### **1. object**
 
 ```javascript
 let h = { name: "Alice", age: 25 };
 console.log(typeof h); // "object"
 ```
 
-- `object` is a non-primitive type used to store key-value pairs.
+- Used to store key-value pairs.
 
 ---
 
-## **Data Structures**
+### **Data Structures**
 
 JavaScript data structures are built upon the `object` data type.
 
-### 1. **Array**
+#### **1. Array**
 
 ```javascript
 let arr = [1, 2, 3];
 console.log(typeof arr); // "object"
 ```
 
-- Arrays are a type of object used to store ordered lists of values.
+- Arrays store ordered lists of values.
 
-### 2. **Function**
+#### **2. Function**
 
 ```javascript
 let func = function () {
@@ -143,18 +147,18 @@ let func = function () {
 console.log(typeof func); // "function"
 ```
 
-- Functions are callable objects with the `typeof` result as `"function"`.
+- Functions are callable objects with the `typeof` result as "function".
 
-### 3. **Map**
+#### **3. Map**
 
 ```javascript
 let map = new Map();
 console.log(typeof map); // "object"
 ```
 
-- Maps are collections of key-value pairs, where keys can be of any type.
+- Maps store key-value pairs with keys of any type.
 
-### 4. **Set**
+#### **4. Set**
 
 ```javascript
 let set = new Set([1, 2, 3]);
@@ -163,16 +167,16 @@ console.log(typeof set); // "object"
 
 - Sets store unique values of any type.
 
-### 5. **WeakMap**
+#### **5. WeakMap**
 
 ```javascript
 let weakMap = new WeakMap();
 console.log(typeof weakMap); // "object"
 ```
 
-- WeakMaps are similar to Maps but with keys that are weakly referenced.
+- WeakMaps are Maps with keys that are weakly referenced.
 
-### 6. **WeakSet**
+#### **6. WeakSet**
 
 ```javascript
 let weakSet = new WeakSet();
@@ -181,18 +185,18 @@ console.log(typeof weakSet); // "object"
 
 - WeakSets store weakly referenced objects.
 
-### 7. **Date**
+#### **7. Date**
 
 ```javascript
 let date = new Date();
 console.log(typeof date); // "object"
 ```
 
-- Dates represent points in time.
+- Represents points in time.
 
 ---
 
-## **Summary Table**
+## Summary Table
 
 | **Type/Structure** | **Example**                    | **typeof Result** |
 | ------------------ | ------------------------------ | ----------------- |
@@ -214,10 +218,8 @@ console.log(typeof date); // "object"
 
 ---
 
-### **Key Observations:**
+## Key Observations
 
-1. The `typeof` operator for most data structures (like Array, Map, Set, etc.) returns `"object"`, as they are all derived from the `object` type.
+1. The `typeof` operator for most data structures (e.g., `Array`, `Map`, `Set`) returns `"object"`, as they derive from the `object` type.
 2. Functions are the exception, returning `"function"` instead of `"object"`.
-3. `null` is a special case where `typeof` returns `"object"`, which is considered a historical bug in JavaScript.
-
----
+3. `null` is a special case where `typeof` returns `"object"`, which is a historical quirk.
