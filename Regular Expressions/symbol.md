@@ -1,163 +1,198 @@
-# Regular Expressions in JavaScript
+# Regular Expressions in Legacy JavaScript Algorithms and Data Structures
 
-Regular Expressions (regex) are powerful tools for pattern matching and text manipulation. In this guide, we will cover topics from FreeCodeCamp's **Regular Expressions** section, focusing on lessons 1 through 17.
+## What are Regular Expressions?
 
-## 1. **Using the `test` Method**
+Regular Expressions (regex) are patterns used to match character combinations in strings. In JavaScript, they are implemented using the `RegExp` object and the `String` methods that support regex (e.g., `match`, `replace`, `search`, and `split`).
 
-The `test` method is used to test whether a regex matches a string.
+---
+
+## Syntax of Regular Expressions
+
+### Creating Regex
+
+1. **Literal Notation:**
+   ```javascript
+   const regex = /pattern/flags;
+   ```
+2. **RegExp Constructor:**
+   ```javascript
+   const regex = new RegExp("pattern", "flags");
+   ```
+
+### Flags
+
+Flags modify the behavior of regex. Common flags are:
+
+- `g` - Global search (find all matches).
+- `i` - Case-insensitive search.
+- `m` - Multi-line search.
+- `s` - Allows `.` to match newline characters.
+- `u` - Enables full Unicode support.
+- `y` - Sticky search (matches only at the exact position in the string).
+
+---
+
+## Special Characters
+
+### Metacharacters
+
+- `.` - Matches any character except newline (use flag `s` to include newline).
+- `\` - Escapes special characters.
+- `^` - Matches the beginning of a string.
+- `$` - Matches the end of a string.
+- `*` - Matches zero or more occurrences.
+- `+` - Matches one or more occurrences.
+- `?` - Matches zero or one occurrence (also used for lazy quantifiers).
+- `{n}` - Matches exactly `n` occurrences.
+- `{n,}` - Matches `n` or more occurrences.
+- `{n,m}` - Matches between `n` and `m` occurrences.
+
+### Character Sets
+
+- `[abc]` - Matches any one of the characters inside the brackets.
+- `[^abc]` - Matches any character NOT inside the brackets.
+- `[a-z]` - Matches any character in the range `a` to `z`.
+
+### Predefined Character Classes
+
+- `\d` - Matches any digit (equivalent to `[0-9]`).
+- `\D` - Matches any non-digit.
+- `\w` - Matches any word character (alphanumeric and underscore).
+- `\W` - Matches any non-word character.
+- `\s` - Matches any whitespace character.
+- `\S` - Matches any non-whitespace character.
+- `.` - Matches any character except newline.
+
+### Quantifiers
+
+- `*` - Zero or more times.
+- `+` - One or more times.
+- `?` - Zero or one time.
+- `{n}` - Exactly `n` times.
+- `{n,}` - At least `n` times.
+- `{n,m}` - Between `n` and `m` times.
+
+---
+
+## Groups and Ranges
+
+### Grouping
+
+- `(abc)` - Captures `abc` as a group.
+
+### Non-Capturing Groups
+
+- `(?:abc)` - Matches `abc` but does not capture it.
+
+### Named Capturing Groups
+
+- `(?<name>abc)` - Captures `abc` and assigns it to the group `name`.
+
+### Backreferences
+
+- `\1` - Refers to the first captured group.
+- `\k<name>` - Refers to a named capturing group.
+
+---
+
+## Lookaheads and Lookbehinds
+
+### Lookaheads
+
+- **Positive Lookahead:**
+  Matches `X` only if `Y` follows it.
+  ```regex
+  X(?=Y)
+  ```
+- **Negative Lookahead:**
+  Matches `X` only if `Y` does not follow it.
+  ```regex
+  X(?!Y)
+  ```
+
+### Lookbehinds
+
+- **Positive Lookbehind:**
+  Matches `X` only if `Y` precedes it.
+  ```regex
+  (?<=Y)X
+  ```
+- **Negative Lookbehind:**
+  Matches `X` only if `Y` does not precede it.
+  ```regex
+  (?<!Y)X
+  ```
+
+---
+
+## Anchors
+
+- `^` - Matches the start of a string.
+- `$` - Matches the end of a string.
+- `\b` - Matches a word boundary.
+- `\B` - Matches a non-word boundary.
+
+---
+
+## Common Methods
+
+### String Methods with Regex
+
+1. `match()`
+   ```javascript
+   "abc123".match(/\d+/); // ['123']
+   ```
+2. `replace()`
+   ```javascript
+   "abc123".replace(/\d+/, ""); // 'abc'
+   ```
+3. `search()`
+   ```javascript
+   "abc123".search(/\d+/); // 3
+   ```
+4. `split()`
+   ```javascript
+   "abc123xyz".split(/\d+/); // ['abc', 'xyz']
+   ```
+
+### RegExp Methods
+
+1. `test()`
+   ```javascript
+   const regex = /\d+/;
+   regex.test("abc123"); // true
+   ```
+2. `exec()`
+   ```javascript
+   const regex = /\d+/;
+   regex.exec("abc123"); // ['123']
+   ```
+
+---
+
+## Examples
+
+### Validate Email
 
 ```javascript
-let myString = "Hello, World!";
-let myRegex = /Hello/;
-console.log(myRegex.test(myString)); // true
+const emailRegex = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
+emailRegex.test("example@example.com"); // true
 ```
 
-- **Regex:** `/Hello/` matches the exact string "Hello".
-- **Output:** `true` because "Hello" is in `myString`.
-
-## 2. **Match Literal Strings**
-
-Match exact sequences of characters using literal strings.
+### Password Strength Check
 
 ```javascript
-let waldoIsHiding = "Somewhere Waldo is hiding!";
-let waldoRegex = /Waldo/;
-console.log(waldoRegex.test(waldoIsHiding)); // true
+const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+passwordRegex.test("Password1"); // true
 ```
 
-## 3. **Match a Literal String with Different Possibilities**
-
-Use the pipe (`|`) operator to specify multiple patterns.
+### Extract Numbers
 
 ```javascript
-let petString = "James has a pet cat.";
-let petRegex = /dog|cat|bird|fish/;
-console.log(petRegex.test(petString)); // true
-```
-
-## 4. **Ignore Case While Matching**
-
-Use the `i` flag to make regex case-insensitive.
-
-```javascript
-let myString = "freeCodeCamp";
-let fccRegex = /freecodecamp/i;
-console.log(fccRegex.test(myString)); // true
-```
-
-## 5. **Extract Matches**
-
-Use the `match` method to extract matched substrings.
-
-```javascript
-let extractStr = "Extract the word 'coding' from this string.";
-let codingRegex = /coding/;
-console.log(extractStr.match(codingRegex)); // ["coding"]
-```
-
-## 6. **Find More Than the First Match**
-
-Use the `g` flag to find all matches in a string.
-
-```javascript
-let twinkleStar = "Twinkle, twinkle, little star";
-let starRegex = /twinkle/gi;
-console.log(twinkleStar.match(starRegex)); // ["Twinkle", "twinkle"]
-```
-
-## 7. **Match Anything with Wildcard Period**
-
-The dot (`.`) matches any single character (except newline).
-
-```javascript
-let exampleStr = "Let's have fun with regular expressions!";
-let unRegex = /.un/;
-console.log(unRegex.test(exampleStr)); // true
-```
-
-## 8. **Match Single Character with Multiple Possibilities**
-
-Use character sets (`[]`) to define a group of characters.
-
-```javascript
-let bgRegex = /b[aiu]g/; // Matches "big", "bag", or "bug".
-```
-
-## 9. **Match Letters of the Alphabet**
-
-Use ranges in character sets to match sequences of characters.
-
-```javascript
-let alphabetRegex = /[a-z]/;
-console.log(alphabetRegex.test("abc")); // true
-```
-
-## 10. **Match Numbers and Letters**
-
-Combine ranges to match numbers and letters.
-
-```javascript
-let alphanumericRegex = /[a-z0-9]/i;
-```
-
-## 11. **Match Characters Not Specified**
-
-Use the caret (`^`) inside character sets to negate.
-
-```javascript
-let notVowelsRegex = /[^aeiou]/gi;
-```
-
-## 12. **Match Characters that Occur One or More Times**
-
-Use the `+` quantifier to match one or more occurrences.
-
-```javascript
-let multipleARegex = /a+/;
-```
-
-## 13. **Match Characters that Occur Zero or More Times**
-
-Use the `*` quantifier to match zero or more occurrences.
-
-```javascript
-let zeroOrMoreARegex = /a*/;
-```
-
-## 14. **Find Characters with Lazy Matching**
-
-Lazy matching stops as soon as a match is found.
-
-```javascript
-let text = "titanic";
-let lazyRegex = /t[a-z]*?i/;
-console.log(text.match(lazyRegex)); // ["ti"]
-```
-
-## 15. **Match Beginning String Patterns**
-
-The caret (`^`) outside of brackets matches the beginning of a string.
-
-```javascript
-let startRegex = /^Hello/;
-```
-
-## 16. **Match Ending String Patterns**
-
-The dollar sign (`$`) matches the end of a string.
-
-```javascript
-let endRegex = /World!$/;
-```
-
-## 17. **Match All Letters and Numbers**
-
-Use `\w` to match letters, digits, and underscores.
-
-```javascript
-let shorthandRegex = /\w+/;
+const numberRegex = /\d+/g;
+"abc123xyz".match(numberRegex); // ['123']
 ```
 
 ---
 
-Each of these regex concepts builds upon the previous ones, enabling more complex and flexible pattern matching. Practice each with examples to strengthen your understanding!
+This comprehensive overview explains the fundamentals and usage of regular expressions in JavaScript for both legacy algorithms and modern development.
