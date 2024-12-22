@@ -1,7 +1,6 @@
-var studlyCapVar;
-var properCamelCase;
-var titleCaseOver;
+const arr1 = ["JAN", "FEB", "MAR", "APR", "MAY"];
+let arr2;
 
-studlyCapVar = 10;
-properCamelCase = "A String";
-titleCaseOver = 9000;
+arr2 = [...arr1];
+
+console.log(arr2);

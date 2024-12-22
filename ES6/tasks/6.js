@@ -1,2 +1,1 @@
-var myFirstName = "Mehdi";
-var myLastName = "Asadov";
+const increment = (number, value = 1) => number + value;

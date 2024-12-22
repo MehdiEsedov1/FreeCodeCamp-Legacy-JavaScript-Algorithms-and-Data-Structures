@@ -1,7 +1,8 @@
-var a = 5;
-var b = 10;
-var c = "I am a";
+const sum = (...args) => {
+  let total = 0;
 
-a = a + 1;
-b = b + 5;
-c = c + " String!";
+  for (let i = 0; i < args.length; i++) {
+    total += args[i];
+  }
+  return total;
+};
